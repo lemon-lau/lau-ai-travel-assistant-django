@@ -38,7 +38,7 @@ SECRET_KEY = get_env_var("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = []
+ALLOWED_HOSTS = ["https://lau-ai-travel-assistant-django.onrender.com"]
 
 
 # Application definition
