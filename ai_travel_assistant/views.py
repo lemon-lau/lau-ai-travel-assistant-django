@@ -2,8 +2,8 @@ from django.http import JsonResponse
 from django.views.decorators.csrf import csrf_exempt
 import json
 
-from api_functions.scrape_api import scrape_and_store_api
-from api_functions.chat_api import chat_api
+from .api_functions.scrape_api import scrape_and_store_api
+from .api_functions.chat_api import chat_api
 
 @csrf_exempt
 def scrape_view(request):
