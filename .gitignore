@@ -1,0 +1,11 @@
+# KEY FILE
+.env
+
+# PACKAGE FILES
+venv/
+
+# OS FILE
+.DS_Store
+
+# DEFAULT DB
+db.sqlite3
