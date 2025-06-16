@@ -17,10 +17,17 @@ Including another URLconf
 from django.contrib import admin
 from django.urls import path
 
-from .views import scrape_view, chat_view
+from .views import (
+    health_check_view,
+    scrape_view,
+    chat_view,
+    history_view
+)
 
 urlpatterns = [
+    path("", health_check_view, name="health_check"),
     path('admin/', admin.site.urls),
     path("scrape/", scrape_view, name="scrape"),
     path("chat/", chat_view, name="chat"),
+    path("history/", history_view, name="history"),
 ]

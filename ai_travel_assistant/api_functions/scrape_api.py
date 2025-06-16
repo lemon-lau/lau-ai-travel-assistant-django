@@ -39,9 +39,14 @@ def scrape_and_store_api():
             response = requests.get(url, timeout=10)
             response.raise_for_status()
             chunked_article = chunk_article(response.text, label, url)
-            embed_and_store_chunked_article(chunked_article, label, url)
+            embed_and_store_chunked_article(chunked_article)
         except Exception as e:
             print(f"Failed to scrape and store {label}: {e}")
+
+    return {
+        "status_code": 200,
+        "message": "Scrape and Store Successful"
+    }
 
 
 # CHUNK ARTICLE FROM URL BY PARAGRAPH SECTIONS AND LISTS INTO OPTIMAL TOKEN SIZE
@@ -124,10 +129,7 @@ def chunk_article(html: str,  label: str, source_url: str) -> list:
             except Exception as e:
                 raise ValueError(f"Error fetching {api_url}: {e}")
 
-    return {
-        "status_code": 200,
-        "message": "Scrape and Store Successful"
-    }
+    return article_chunks
 
 
 # HELPER FUNCTION TO CHUNK LONG TEXTS TO OPTIMAL TOKEN SIZE
@@ -170,7 +172,7 @@ def embed_and_store_chunked_article(chunked_article):
         # FORMAT VECTORS AND UPSERT IN INDEX
         pinecone_vectors = [
             {
-                "id": uuid.uuid4(),
+                "id": str(uuid.uuid4()),
                 "values": vector.embedding,
                 "metadata": metadata[idx]
             }

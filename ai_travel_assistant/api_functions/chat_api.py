@@ -10,7 +10,7 @@ open_ai_client = OpenAI(
     api_key=settings.OPENAI_API_KEY,
     organization=settings.OPENAI_ORG_ID)
 pinecone_client = Pinecone(api_key=settings.PINECONE_API_KEY)
-supabase = create_client(settings.SUPABASE_URL, settings.SUPABASE_API_KEY)
+supabase_client = create_client(settings.SUPABASE_URL, settings.SUPABASE_API_KEY)
 
 # CONNECT PINECONE INDEX
 pinecone_index = pinecone_client.Index(settings.PINECONE_INDEX_NAME)
@@ -57,7 +57,21 @@ def log_query_to_db(question, answer, sources):
     }
 
     try:
-        supabase.table("query_logs").insert(payload).execute()
+        supabase_client.table("query_logs").insert(payload).execute()
     except Exception as e:
         print("Supabase insert failed:", e)
         raise
+
+def history_api():
+    try:
+        response = (
+            supabase_client.table("query_logs")
+            .select("*")
+            .order("id", desc=True)
+            .limit(50)
+            .execute()
+        )
+        return response.data
+    except Exception as e:
+        print(e)
+        return {"error": "Supabase query failed"}

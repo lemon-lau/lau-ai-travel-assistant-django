@@ -38,10 +38,15 @@ SECRET_KEY = get_env_var("SECRET_KEY")
 # SECURITY WARNING: don't run with debug turned on in production!
 DEBUG = os.getenv("DEBUG", "False") == "True"
 
-ALLOWED_HOSTS = ["https://lau-ai-travel-assistant-django.onrender.com"]
+ALLOWED_HOSTS = [
+    "localhost",
+    "127.0.0.1",
+    "lau-ai-travel-assistant-django.onrender.com"
+]
 
-
-# Application definition
+CORS_ALLOWED_ORIGINS = [
+    "http://localhost:5173",
+]
 
 INSTALLED_APPS = [
     'django.contrib.admin',
@@ -50,6 +55,8 @@ INSTALLED_APPS = [
     'django.contrib.sessions',
     'django.contrib.messages',
     'django.contrib.staticfiles',
+    # FOR FE COMMUNICATION
+    'corsheaders'
 ]
 
 MIDDLEWARE = [
@@ -60,6 +67,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    # FOR FE COMMUNICATION
+    'corsheaders.middleware.CorsMiddleware'
 ]
 
 ROOT_URLCONF = 'ai_travel_assistant.urls'
