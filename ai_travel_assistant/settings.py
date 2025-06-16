@@ -46,6 +46,7 @@ ALLOWED_HOSTS = [
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
+    "https://ai-travel-assistant-u0rg.onrender.com"
 ]
 
 INSTALLED_APPS = [
@@ -60,6 +61,7 @@ INSTALLED_APPS = [
 ]
 
 MIDDLEWARE = [
+    'corsheaders.middleware.CorsMiddleware', # FOR FE COMMUNICATION
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
     'django.middleware.common.CommonMiddleware',
@@ -67,8 +69,7 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
-    # FOR FE COMMUNICATION
-    'corsheaders.middleware.CorsMiddleware'
+
 ]
 
 ROOT_URLCONF = 'ai_travel_assistant.urls'
