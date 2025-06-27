@@ -41,12 +41,20 @@ DEBUG = os.getenv("DEBUG", "False") == "True"
 ALLOWED_HOSTS = [
     "localhost",
     "127.0.0.1",
-    "lau-ai-travel-assistant-django.onrender.com"
+    "ai-travel-assistant-production.up.railway.app",
+    ".railway.app",  # Allow all Railway subdomains
+    ".up.railway.app",  # Alternative Railway domain pattern
 ]
+
+# For Railway, also allow the PORT environment variable to be used
+if os.getenv("PORT"):
+    ALLOWED_HOSTS.append("*")  # Allow all hosts when PORT is set (Railway deployment)
 
 CORS_ALLOWED_ORIGINS = [
     "http://localhost:5173",
-    "https://ai-travel-assistant-u0rg.onrender.com"
+    "https://ai-travel-assistant-production.up.railway.app",
+    "https://*.railway.app",  # Allow Railway domains
+    "https://*.up.railway.app",  # Alternative Railway domain pattern
 ]
 
 INSTALLED_APPS = [
