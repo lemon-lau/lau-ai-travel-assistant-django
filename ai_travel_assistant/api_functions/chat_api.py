@@ -29,7 +29,7 @@ def chat_api(query: str):
         context = "\n".join([match['metadata']['text'] for match in results['matches']])
 
         response = open_ai_client.chat.completions.create(
-            model="gpt-4",
+            model="gpt-4o-mini",
             messages=[
                 {"role": "system", "content":
                 "You are a seasoned travel guide speaking directly to the traveler. \

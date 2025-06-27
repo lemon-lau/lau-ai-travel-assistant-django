@@ -166,5 +166,5 @@ SUPABASE_URL = get_env_var("SUPABASE_URL")
 SUPABASE_API_KEY = get_env_var("SUPABASE_API_KEY")
 
 # OTHER
-EMBEDDING_MODEL = get_env_var("EMBEDDING_MODEL", default="text-embedding-3-large")
+EMBEDDING_MODEL = get_env_var("EMBEDDING_MODEL", default="text-embedding-3-small")
 SCRAPED_PAGES_URL_MAP = json.loads(get_env_var("SCRAPED_PAGES_URL_MAP", required=False) or "{}")
